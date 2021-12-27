@@ -14,7 +14,7 @@ const average = (good - bad) / total;
 
 const positive = (good / total) * 100;
 
-if (good == 0 && neutral == 0 && bad == 0) {
+if (good === 0 && neutral === 0 && bad === 0) {
   return (
     <div>
       <h1>statistics</h1>
@@ -43,7 +43,7 @@ if (good == 0 && neutral == 0 && bad == 0) {
 
 const StatisticLine = ({text, value}) => {
 
-  if (text == 'positive') {
+  if (text === 'positive') {
     return (
       <tr>
         <td>{text}</td><td>{value} %</td>
