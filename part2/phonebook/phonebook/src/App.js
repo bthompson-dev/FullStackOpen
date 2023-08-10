@@ -109,8 +109,6 @@ const App = () => {
                 person.id !== addedPerson.id ? person : returnedPerson
               )
             );
-          })
-          .then((result) => {
             setNewName("");
             setNewNumber("");
             setNotification(`${newName}'s number was updated.`);
@@ -119,9 +117,7 @@ const App = () => {
             }, 5000);
           })
           .catch((error) => {
-            setErrorNotification(
-              `${newName} has already been removed from the server.`
-            );
+            setErrorNotification(error.response.data.error)
             setTimeout(() => {
               setErrorNotification(null);
             }, 5000);
@@ -140,13 +136,21 @@ const App = () => {
         })
         .then((returnedPerson) => {
           setPersons(persons.concat(returnedPerson));
+          setNewName("");
+          setNewNumber("");
+          setNotification(`${newName} was added to database.`);
+          setTimeout(() => {
+            setNotification(null);
+          }, 5000);
+        })
+        .catch((error) => {
+          setErrorNotification(error.response.data.error);
+          setNewName("");
+          setNewNumber("");
+          setTimeout(() => {
+            setErrorNotification(null);
+          }, 5000);
         });
-      setNewName("");
-      setNewNumber("");
-      setNotification(`${newName} was added to database.`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
     }
   };
 
